@@ -656,8 +656,8 @@ body {
 
 .theme-icon {
   position: relative;
-  width: 22px;
-  height: 22px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -665,38 +665,67 @@ body {
 
 .sun-icon {
   position: absolute;
-  width: 20px;
-  height: 20px;
+  width: 18px;
+  height: 18px;
   border-radius: 50%;
-  background: #d4af37;
-  box-shadow: 0 0 10px #d4af37;
+  background: #ffd700;
+  box-shadow: 
+    0 0 20px #ffd700,
+    0 0 40px #ffaa00,
+    inset 0 0 10px #ffffff;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: sunPulse 2s infinite ease-in-out;
 }
 
 .moon-icon {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
-  background: #d4af37;
-  box-shadow: inset 3px -3px 0 #2a2a2a;
+  background: #c0c0c0;
+  box-shadow: 
+    0 0 20px #c0c0c0,
+    0 0 40px #808080,
+    inset -4px -4px 0 #2a2a2a;
   transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: moonGlow 3s infinite alternate;
 }
 
 .app.dark .moon-icon {
-  box-shadow: inset 3px -3px 0 #f0f0f0;
+  box-shadow: 
+    0 0 30px #d4af37,
+    0 0 60px #996633,
+    inset -4px -4px 0 #f0f0f0;
+}
+
+@keyframes sunPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #ffaa00;
+  }
+  50% {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px #ffd700, 0 0 60px #ffaa00, 0 0 80px #ff8800;
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 20px #ffd700, 0 0 40px #ffaa00;
+  }
+}
+
+@keyframes moonGlow {
+  0% {
+    opacity: 0.9;
+    box-shadow: 0 0 20px #c0c0c0, 0 0 30px #808080;
+  }
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 30px #d4af37, 0 0 50px #996633, 0 0 70px #663300;
+  }
 }
 
 .hidden {
   display: none !important;
-}
-
-.github-button {
-  background: rgba(255, 255, 255, 0.98);
-}
-
-.app.dark .github-button {
-  background: rgba(45, 45, 45, 0.98);
 }
 
 .github-icon {

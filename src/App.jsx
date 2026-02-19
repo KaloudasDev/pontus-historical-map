@@ -267,7 +267,7 @@ function App() {
                   transition={{ delay: 0.25 }}
                 >
                   <button className="more-images-button" onClick={toggleMoreImages}>
-                    {showMoreImages ? '✓ Λιγότερες εικόνες' : 'Δείτε περισσότερες εικόνες ↓'}
+                    {showMoreImages ? 'Δείτε λιγότερες εικόνες' : 'Δείτε περισσότερες εικόνες'}
                   </button>
                   
                   <AnimatePresence>
