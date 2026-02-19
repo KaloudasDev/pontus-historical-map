@@ -61,6 +61,7 @@ function App() {
   const [currentImages, setCurrentImages] = useState([]);
   const [currentCityName, setCurrentCityName] = useState('');
   const [showMoreImages, setShowMoreImages] = useState(false);
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(true);
 
   useEffect(() => {
     localStorage.setItem('pontus-theme', JSON.stringify(darkMode));
@@ -139,39 +140,58 @@ function App() {
     setShowMoreImages(prev => !prev);
   };
 
+  const toggleLeftSidebar = () => {
+    setLeftSidebarOpen(!leftSidebarOpen);
+  };
+
   return (
     <div className={`app ${darkMode ? 'dark' : ''}`}>
-      <motion.div 
-        className={`sidebar left-sidebar ${darkMode ? 'dark' : ''}`}
-        initial={{ x: -300, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
+      <button 
+        className={`menu-button ${darkMode ? 'dark' : ''} ${!leftSidebarOpen ? 'menu-button-closed' : ''}`}
+        onClick={toggleLeftSidebar}
+        aria-label="Toggle menu"
       >
-        <div className="sidebar-header">
-          <h1>Ιστορικός Χάρτης</h1>
-          <h1 className="subtitle-main">του Πόντου</h1>
-          <p className="subtitle">Επτά σημαντικές πόλεις</p>
-        </div>
-        <div className="city-list">
-          {cities.map((city, index) => (
-            <motion.div
-              key={city.id}
-              className={`city-list-item ${selectedCity?.id === city.id ? 'active' : ''} ${darkMode ? 'dark' : ''}`}
-              onClick={() => handleCitySelect(city)}
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, backgroundColor: darkMode ? 'rgba(212, 175, 55, 0.2)' : 'rgba(212, 175, 55, 0.1)' }}
-            >
-              <span className="city-name">{city.name}</span>
-              <span className="city-region">{city.region}</span>
-            </motion.div>
-          ))}
-        </div>
-        <div className="sidebar-footer">
-          <p>© 2026 • Historical Depiction</p>
-        </div>
-      </motion.div>
+        <span className="menu-icon"></span>
+        <span className="menu-icon"></span>
+        <span className="menu-icon"></span>
+      </button>
+
+      <AnimatePresence mode="wait">
+        {leftSidebarOpen && (
+          <motion.div 
+            className={`sidebar left-sidebar ${darkMode ? 'dark' : ''}`}
+            initial={{ x: -300, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            exit={{ x: -300, opacity: 0 }}
+            transition={{ duration: 0.3, ease: "easeOut" }}
+          >
+            <div className="sidebar-header">
+              <h1>Ιστορικός Χάρτης</h1>
+              <h1 className="subtitle-main">του Πόντου</h1>
+              <p className="subtitle">Επτά σημαντικές πόλεις</p>
+            </div>
+            <div className="city-list">
+              {cities.map((city, index) => (
+                <motion.div
+                  key={city.id}
+                  className={`city-list-item ${selectedCity?.id === city.id ? 'active' : ''} ${darkMode ? 'dark' : ''}`}
+                  onClick={() => handleCitySelect(city)}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: index * 0.1 }}
+                  whileHover={{ scale: 1.02, backgroundColor: darkMode ? 'rgba(212, 175, 55, 0.2)' : 'rgba(212, 175, 55, 0.1)' }}
+                >
+                  <span className="city-name">{city.name}</span>
+                  <span className="city-region">{city.region}</span>
+                </motion.div>
+              ))}
+            </div>
+            <div className="sidebar-footer">
+              <p>© 2026 • Giachasidis Project</p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <MapContainer
         center={[39.5, 33.0]}
