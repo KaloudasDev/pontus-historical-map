@@ -107,7 +107,7 @@ function App() {
   };
 
   const openGitHub = () => {
-    window.open('https://github.com/KaloudasDev', '_blank');
+    window.open('https://github.com/KaloudasDev/pontus-historical-map', '_blank');
   };
 
   const openImageModal = (images, index, cityName) => {
