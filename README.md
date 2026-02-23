@@ -1,4 +1,4 @@
-## Historical Map of Pontus 🦅
+## Historical Map of Pontus
 
 Professional interactive web application showcasing seven significant cities of the Pontus region with historical information and imagery. Built with modern web technologies for optimal performance and user experience.
 
